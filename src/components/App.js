@@ -1,20 +1,23 @@
 import React, {useState} from 'react';
-import './Stylesheet.css';
+import './stylesheet.css';
 import logo from '../logo.png';
 import { TableResearch } from './TableResearch';
 
 
 //TODO 
-//Que la page ne soit pas scrollable flexible
+//Que la page ne soit pas scrollable sauf si besoin
 //Ajouter saut de ligne dans description
-//centrer l'image en version mobile 
+//centrer l'image en version mobile seulement du descriptif
 //delay de loading d'images
+// mot onkeypress to search
+// é ou e 
+// si utilisateur resquest le meme nom ne pas envoyer de request
 
 
 const App =() => {
     const [selectedSuggestion, setSelectedSuggestion] = useState (null);
     const [image, setImages] = useState([]);
-    const [randomLabel, setRandomLabel] = useState(['Pomme'])
+    const [randomLabel, setRandomLabel] = useState(['Pomme']);
    
     return(
         <div className="container">
@@ -31,7 +34,7 @@ const App =() => {
             setRandomLabel={setRandomLabel}
           />  
           {selectedSuggestion ? (
-            <div className="ui segment">
+            <div className="ui raised segment">
               <div className="ui items">
                 <div className="item">
                   <div className="image-logo item">
@@ -60,7 +63,7 @@ const App =() => {
                   </div>
                 </div>
               </div>
-            <div className="ui segment">
+            <div className="ui raised segment">
                 <div className="description">
                     <h5 className="header">Particularité:</h5>
                       <p className="description"> {selectedSuggestion.description}</p>

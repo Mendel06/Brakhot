@@ -29,9 +29,16 @@ export const TableResearch = ({setSelectedSuggestion,setImages,setRandomLabel}) 
         }, 5000);
       }
     }, [table,setRandomLabel]);
-    
 
-    const onChange = (event, {newValue}) => setResearch(newValue);
+    const onChange = (e, {newValue, m}) => setResearch(newValue);
+
+    
+    const onKeyDown= (event) => {
+      if (event.key === 'Enter') {
+          setSuggestions([research]);
+          onSuggestionSelected();
+        }
+      }
 
     const getSuggestions = (research, tableList) => {
       const inputValue = research.trim().toLowerCase();
@@ -44,7 +51,6 @@ export const TableResearch = ({setSelectedSuggestion,setImages,setRandomLabel}) 
        
     const onSuggestionSelected = async (event,{suggestion}) => {
       setSelectedSuggestion(suggestion);
-      
       const suggestionLabelEn= suggestion.labelEn;
       const response = await unsplash.get('/search/photos',{
             params:{
@@ -71,7 +77,8 @@ export const TableResearch = ({setSelectedSuggestion,setImages,setRandomLabel}) 
     const inputProps = {
         placeholder: 'Rechercher...',
         value: research,
-        onChange: onChange
+        onChange: onChange,
+        onKeyDown: onKeyDown
     };
     
     return (
